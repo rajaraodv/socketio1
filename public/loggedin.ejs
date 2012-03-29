@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='/stylesheets/bootstrap.min.css'>
+</head>
+<body>
+<div class='container'>
+	<br><br>
+    <table align='center'>
+        <tr>
+            <td>		
+				<div>
+					<div style='height:300px;overflow:auto' id="conversation"></div>
+						<div class='form-search'>
+					<input class="input-xlarge" id="data"/>
+					<input type="button"  class="btn btn-primary"  id="datasend" value="Send"/>
+					</div>
+				</div>
+						
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+<script type="text/javascript" src="/javascripts/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+<script>
+    var socket = io.connect(document.location.href);
+
+    // on connection to server, ask for user's name with an anonymous callback
+    socket.on('connect', function() {
+		console.log("client connected");
+    });
+
+    socket.on('updatechat', function (data) {
+        $('#conversation').append(data);
+    });
+
+    // listener, whenever the server emits 'updateusers', this updates the username list
+    socket.on('updateusers', function(data) {
+        $('#users').empty();
+        $.each(data, function(key, value) {
+            $('#users').append('<div>' + key + '</div>');
+        });
+    });
+	socket.on('disconnect', function () {
+		console.log("disconnected");
+	});
+
+	function sendchat() {
+        var message = $('#data').val();
+        $('#data').val('');
+        // tell server to execute 'sendchat' and send along one parameter
+        socket.emit('sendchat', message);
+    }
+    // on load of page
+    $(function() {
+		function sendChat() {
+	        var message = $('#data').val();
+	        $('#data').val('');
+	        // tell server to execute 'sendchat' and send along one parameter
+	        socket.emit('sendchat', message);
+	    }
+        // when the client clicks SEND
+        $('#datasend').click(function() {
+            sendChat();
+        });
+
+        // when the client hits ENTER on their keyboard
+        $('#data').keypress(function(e) {
+            if (e.which == 13) {
+                sendChat();
+            }
+        });
+    });
+
+</script>
+</html> 
+

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='/stylesheets/bootstrap.min.css'>
+</head>
+<body>
+<div class='container'>
+    <table align='center'>
+        <tr>
+            <td>
+                    <form class="form-horizontal well" method="POST" action="/">
+                        <fieldset>
+                            <legend>ExpressJS & Socket.io chat demo</legend>
+							     <fieldset>
+		                                <p>Enter your name to login:</p>
+		                            </fieldset>
+	                            <div class="control-group">
+	                                <label class="control-label" for="user">Username:</label>
+	                                <div class="controls">
+	                                    <input type="text" class="input-xlarge" id="user" name="user" ></input>
+	                                </div>
+	                            </div>	
+								<div class="control-group">
+			                          <div class="controls">
+			                          <input type="submit" class="btn btn-primary" id="submit" value="Login"></input>
+			                         </div>
+			                    </div>
+                        </fieldset>
+
+						
+                    </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+<script type="text/javascript" src="../javascripts/jquery-1.7.2.min.js"></script>
+<script>
+    $(function() {
+		$("#user").focus();
+    });
+</script>
+</html>

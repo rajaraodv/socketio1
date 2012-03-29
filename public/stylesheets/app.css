@@ -1,0 +1,3 @@
+#mainDiv { height: 300px; overflow: auto; width: 500px; border: 1px solid #eee; font: 13px Helvetica, Arial; }
+#chatList li { padding: 8px; margin: 0; }
+#chatList li:nth-child(odd) { background: #F6F6F6; }
